@@ -1,0 +1,114 @@
+{
+  "name": "Spring boot in action",
+  "description": "abook a bout learning boot",
+  "contents": [
+    {
+      "name": "Bootstrapping Spring",
+      "page_no": 1,
+      "level": 1,
+      "order":1,
+      "children": [
+        {
+          "name": "Spring rebooted",
+          "page_no": 2,
+          "level": 2,
+          "order":1,
+          "children": [
+            {
+              "name": "Taking a fresh look at spring",
+              "page_no": 2,
+              "level": 3,
+              "order":1
+            },
+            {
+              "name": "Examing Spring Boot essentials",
+              "page_no": 4,
+              "level": 3,
+              "order":2
+            },
+            {
+              "name": "What spring boot isn't",
+              "page_no": 7,
+              "level": 3,
+              "order":3
+            }
+          ]
+        },
+        {
+          "name": "Getting started with Spring Boot",
+          "page_no": 8,
+          "level": 2,
+          "order":2,
+          "children":[
+            {
+                "name": "Installing the Spring Boot CLI",
+                "page_no": 8,
+                "level": 3,
+                "order":1
+              },
+            {
+                "name": "Initializing a Spring boot project with Spring Initializer",
+                "page_no": 12,
+                "level": 3,
+                "order":2
+              }
+          ]
+        },
+        {
+          "name": "Summary",
+          "page_no": 22,
+          "level": 2,
+          "order":3
+        }
+      ]
+    },
+    {
+      "name": "Developing your first Spring Boot application",
+      "page_no": 23,
+      "level": 1,
+      "order":2,
+      "children": [
+        {
+          "name": "Putting Spring Boot to work",
+          "page_no": 24,
+          "level": 2,
+          "order":1,
+          "children":[
+            {
+              "name": "Examining a newly initialized Spring boot project",
+              "page_no": 26,
+              "level": 3,
+              "order":1
+            },
+            {
+              "name": "Dissecting a spring boot project build",
+              "page_no": 30,
+              "level": 3,
+              "order":2
+            }
+          ]
+        },
+        {
+          "name": "Using starter dependencies",
+          "page_no": 33,
+          "level": 2,
+          "order":2,
+          "children":[
+            {
+              "name": "Specifying facet based dependencies",
+              "page_no": 34,
+              "level": 3,
+              "order":1
+            },
+            {
+              "name": "Overriding starter transitive dependencies",
+              "page_no": 35,
+              "level": 3,
+              "order":2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
