@@ -1,7 +1,9 @@
 package com.tableofcontents.api.controllers;
 
 import com.tableofcontents.api.entities.Table;
+import com.tableofcontents.api.entities.TableDto;
 import com.tableofcontents.api.services.ITableService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,9 +41,9 @@ public class TableController {
     }
 
     @PostMapping("/tables")
-    public ResponseEntity<Table> saveTable(@RequestBody Table table){
+    public ResponseEntity<Table> saveTable( @Valid @RequestBody TableDto tableDto){
         try {
-            return new ResponseEntity<Table>(tableService.add(table),HttpStatus.OK);
+            return new ResponseEntity<Table>(tableService.add(tableDto.getTable()),HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
