@@ -1,38 +1,50 @@
 package com.tableofcontents.api.services;
 
 import com.tableofcontents.api.entities.Content;
-import com.tableofcontents.api.entities.Table;
-import com.tableofcontents.api.repositories.IContentRepository;
+import com.tableofcontents.api.repositories.ContentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class ContentServiceImp implements IContentService{
+public class ContentServiceImp implements ContentService {
 
-    final private IContentRepository contentRepository;
+    final private ContentRepository contentRepository;
     @Override
-    public Content add(Table table, Content content) {
+    public Content createContent(Content content) {
+        content.setCreatedAt(LocalDateTime.now());
+        content.setUpdatedAt(LocalDateTime.now());
         return contentRepository.save(content);
     }
-
-    @Override
-    public List get() {
-        return contentRepository.findAll();
-    }
-
-    @Override
-    public Optional get(String id) {
-        return contentRepository.findById(id);
-    }
-
     @Override
     public void delete(String id) {
-        if (get(id).isPresent()){
-            contentRepository.delete((Content) get(id).get());
+        if (getContentById(id).isPresent()){
+            contentRepository.delete(getContentById(id).get());
         }
+    }
+    @Override
+
+    public Content updateContent(Content content) {
+        content.setUpdatedAt(LocalDateTime.now());
+        return contentRepository.save(content);
+    }
+    @Override
+
+    public List<Content> getAllContentsByTableId(String tableId) {
+        return contentRepository.findByTableId(tableId);
+    }
+
+    @Override
+    public List<Content> getContentsByParentId(String tableId, String parentId) {
+        return contentRepository.findByTableIdAndParentId(tableId, parentId);
+    }
+
+    @Override
+    public Optional<Content> getContentById(String id) {
+        return contentRepository.findById(id);
     }
 }
