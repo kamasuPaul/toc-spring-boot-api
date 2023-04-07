@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public interface ITableService {
-    Table add(Table table);
+public interface TableService {
+    Table createTable(Table table);
 
-    List get();
+    List getTables();
 
-    Optional get(String id);
+    Table updateTable(Table table);
+
+    Optional getTableById(String id);
 
     void delete(String id);
 }
