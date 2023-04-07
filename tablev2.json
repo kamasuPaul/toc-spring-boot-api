@@ -1,0 +1,29 @@
+{
+  "name": "Spring boot in action",
+  "description": "abook a bout learning boot",
+  "contents": [
+    {
+      "id": 1,
+      "name": "Bootstrapping Spring",
+      "page_no": 1,
+      "level": 1,
+      "order":1
+    },
+    {
+      "id": 2,
+      "name": "Spring rebooted",
+      "page_no": 2,
+      "level": 2,
+      "order":1,
+      "parent_id": 1
+    },
+    {
+      "id": 3,
+      "name": "Getting started with Spring Boot",
+      "page_no": 8,
+      "level": 2,
+      "order": 2,
+      "parent_id": 1
+    }
+  ]
+}
