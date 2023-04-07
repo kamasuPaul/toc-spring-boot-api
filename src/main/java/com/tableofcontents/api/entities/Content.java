@@ -1,9 +1,8 @@
 package com.tableofcontents.api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,6 +13,8 @@ import java.time.LocalDateTime;
 @Setter
 @jakarta.persistence.Table(name = "contents")
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Content {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -34,6 +35,7 @@ public class Content {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "table_id", nullable = false)
+    @JsonIgnore
     private Table table;
     @CreationTimestamp
     @Column(name = "created_at",nullable = false,updatable = false)

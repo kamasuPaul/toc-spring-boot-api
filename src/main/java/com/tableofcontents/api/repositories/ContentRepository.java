@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface ContentRepository extends JpaRepository<Content,String> {
 
+    //spring Data JPA will generate a SQL query based on the method name  and parameter
     List<Content> findByTableId(String tableId);
 
     List<Content> findByTableIdAndParentId(String tableId, String parentId);
