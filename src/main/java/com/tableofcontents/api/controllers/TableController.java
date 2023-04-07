@@ -2,12 +2,12 @@ package com.tableofcontents.api.controllers;
 
 import com.tableofcontents.api.entities.Table;
 import com.tableofcontents.api.entities.TableDto;
-import com.tableofcontents.api.services.ITableService;
+import com.tableofcontents.api.services.TableService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,14 +15,15 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+@Validated
 @RequiredArgsConstructor
 public class TableController {
-    private final ITableService  tableService;
+    private final TableService tableService;
 
     @GetMapping("/tables")
     public ResponseEntity<List<Table>> getAllTables() {
         try {
-            List<Table> tableList = tableService.get();
+            List<Table> tableList = tableService.getTables();
             if (tableList.isEmpty() || tableList.size() == 0) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -33,7 +34,7 @@ public class TableController {
     }
     @GetMapping("/tables/{id}")
     public ResponseEntity<Table> getTable(@PathVariable String id){
-        Optional<Table> table = tableService.get(id);
+        Optional<Table> table = tableService.getTableById(id);
         if(table.isPresent()){
             return new ResponseEntity<Table>(table.get(),HttpStatus.OK);
         }
@@ -41,9 +42,10 @@ public class TableController {
     }
 
     @PostMapping("/tables")
+    @Validated
     public ResponseEntity<Table> saveTable( @Valid @RequestBody TableDto tableDto){
         try {
-            return new ResponseEntity<Table>(tableService.add(tableDto.getTable()),HttpStatus.OK);
+            return new ResponseEntity<Table>(tableService.createTable(tableDto.getTable()),HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
