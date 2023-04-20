@@ -32,7 +32,9 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x ./gradlew
 
-    - name: Execute Gradle build
+    #TODO add tests
+
+    - name: Execute Gradle build without tests
       run: ./gradlew build -x test
 
     - name: Build the Docker image
