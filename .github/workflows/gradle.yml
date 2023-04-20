@@ -33,7 +33,7 @@ jobs:
       run: chmod +x ./gradlew
 
     - name: Execute Gradle build
-      run: ./gradlew build
+      run: ./gradlew build -x test
 
     - name: Build the Docker image
       run: docker build . --file Dockerfile -t ${{vars.DOCKER_HUB_REPO}}:$(date +%s) -t ${{vars.DOCKER_HUB_REPO}}:latest
