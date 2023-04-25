@@ -23,7 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TableController {
     private final TableService tableService;
-    private  final ContentService contentService;
+    private final ContentService contentService;
 
     @GetMapping("/tables")
     public ResponseEntity<List<Table>> getAllTables() {
@@ -37,43 +37,52 @@ public class TableController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @GetMapping("/tables/{id}")
-    public ResponseEntity<TableDto> getTable(@PathVariable String id){
+    public ResponseEntity<TableDto> getTable(@PathVariable String id) {
         Optional<Table> table = tableService.getTableById(id);
-        if(table.isPresent()){
+        if (table.isPresent()) {
             Table table1 = table.get();
             TableDto tableDto = new TableDto();
             tableDto.setName(table1.getName());
             tableDto.setId(table1.getId());
             tableDto.setDescription(table1.getDescription());
             tableDto.setCategory(table1.getCategory());
-            List<Content> contents = contentService.getContentsByParentId(table1.getId(),null);
+            List<Content> contents = contentService.getContentsByParentId(table1.getId(), null);
             tableDto.setContents(contents);
             return new ResponseEntity<>(tableDto, HttpStatus.OK);
-        }else{
+        } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Table with id " + id + " not found");
         }
     }
 
     @PostMapping("/tables")
     @Validated
-    public ResponseEntity<Table> saveTable( @Valid @RequestBody TableDto tableDto){
+    public ResponseEntity<TableDto> saveTable(@Valid @RequestBody TableDto tableDto) {
         try {
             Table table = tableService.createTable(tableDto.getTable());
             @NotEmpty @Valid List<@Valid Content> contents = tableDto.getContents();
-            contentService.saveContentList(contents,table);
+            contentService.saveContentList(contents, table);
+            TableDto dto = new TableDto();
+            dto.setName(table.getName());
+            dto.setId(table.getId());
+            dto.setDescription(table.getDescription());
+            dto.setCategory(table.getCategory());
+            List<Content> savedContents = contentService.getContentsByParentId(table.getId(), null);
+            dto.setContents(savedContents);
 
-            return new ResponseEntity<Table>(table,HttpStatus.OK);
+            return new ResponseEntity<TableDto>(dto, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @DeleteMapping("/tables/{id}")
-    public ResponseEntity<HttpStatus> deleteTable(@PathVariable String id){
-        try{
+    public ResponseEntity<HttpStatus> deleteTable(@PathVariable String id) {
+        try {
             tableService.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Table with id " + id + " not found");
         }
     }
