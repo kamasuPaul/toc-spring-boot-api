@@ -42,8 +42,8 @@ class ContentControllerTest {
         String tableId = "fc04f4ef-31f6-4c32-aae5-95b593acbf83";
         //mock the tableServicee to return a table
         Table table = new Table(tableId,"My table","Testing table","default",LocalDateTime.now(), LocalDateTime.now());
-        Content content = new Content(id,"Content 1","2",1,1,id,null,table,LocalDateTime.now(), LocalDateTime.now());
-        Content createdContent = new Content(id,"Content 2","2",1,1,id,null,table,LocalDateTime.now(), LocalDateTime.now());
+        Content content = new Content(id,"Content 1","2",1,1,id,null,table,LocalDateTime.now(), LocalDateTime.now(),null);
+        Content createdContent = new Content(id,"Content 2","2",1,1,id,null,table,LocalDateTime.now(), LocalDateTime.now(),null);
 
         List<Content> contents = Arrays.asList(content,createdContent);
 

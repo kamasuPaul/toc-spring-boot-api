@@ -1,5 +1,6 @@
 package com.tableofcontents.api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -22,7 +23,7 @@ public class TableDto {
     @NotEmpty
     @Valid
     private List< @Valid Content> contents;
-
+    @JsonIgnore
     public Table getTable(){
         return new Table(this.id,this.name,this.description,this.category, LocalDateTime.now(),LocalDateTime.now());
     }
