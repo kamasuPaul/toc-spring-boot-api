@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.List;
+
 
 @Data
 @ToString
@@ -14,5 +16,6 @@ public class ContentDto {
     private String name;
     @NotNull
     private String pageNo;
+    private List<Content> children;
 
 }

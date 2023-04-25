@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -44,4 +45,7 @@ public class Content {
     @Column(name = "updated_at",nullable = false)
     private LocalDateTime updatedAt;
 
+    @OneToMany(targetEntity = Content.class,mappedBy = "parentId")
+    @OrderBy("ordering")
+    private List<Content> children;
 }
