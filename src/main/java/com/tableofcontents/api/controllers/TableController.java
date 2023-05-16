@@ -21,6 +21,7 @@ import java.util.Optional;
 @RequestMapping("/api")
 @Validated
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class TableController {
     private final TableService tableService;
     private final ContentService contentService;
