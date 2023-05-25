@@ -27,7 +27,7 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public List getTables() {
-        return tableRepository.findAll();
+        return tableRepository.findAllByOrderByCreatedAtDesc();
     }
 
     @Override
