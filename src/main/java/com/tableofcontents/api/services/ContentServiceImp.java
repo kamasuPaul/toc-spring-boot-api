@@ -18,7 +18,7 @@ public class ContentServiceImp implements ContentService {
     final private ContentRepository contentRepository;
 
     public List<Content> saveContentList(List<Content> contents, Table table) {
-        int i =0;
+        int i =1;
         for (Content content: contents) {
             content.setOrdering(i);
             this.saveContent(content, table,0);
@@ -35,7 +35,7 @@ public class ContentServiceImp implements ContentService {
         content.setGroupUuid(groupUUid);
         content.setLevel(level);
         Content content1 = this.createContent(content);
-        int ordering = 0;
+        int ordering = 1;
         for (Content item : content.getChildren()) {
             item.setParentId(content1.getId());
             item.setOrdering(ordering);

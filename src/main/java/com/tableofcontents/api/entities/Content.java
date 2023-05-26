@@ -28,6 +28,7 @@ public class Content {
     private String pageNo;
 
     @Column(nullable = false)
+    @JsonProperty("order")
     private int ordering;
     @Column(nullable = false)
     private int level;
