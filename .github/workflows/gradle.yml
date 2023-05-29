@@ -54,8 +54,8 @@ jobs:
         REMOTE_USER: ${{ secrets.REMOTE_USER }}
         REMOTE_TARGET: ${{ secrets.REMOTE_TARGET }}
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          echo "Executing command: scp -i $SSH_PRIVATE_KEY ./build/libs/*.jar $REMOTE_USER@$REMOTE_HOST:$REMOTE_TARGET/api.jar"
-          scp -i $SSH_PRIVATE_KEY ./build/libs/*.jar $REMOTE_USER@$REMOTE_HOST:$REMOTE_TARGET/api.jar
+      run: |
+        echo "Executing command: scp -i $SSH_PRIVATE_KEY ./build/libs/*.jar $REMOTE_USER@$REMOTE_HOST:$REMOTE_TARGET/api.jar"
+        scp -i $SSH_PRIVATE_KEY ./build/libs/*.jar $REMOTE_USER@$REMOTE_HOST:$REMOTE_TARGET/api.jar
     - name: Clean up
       run: rm -rf ./build/libs/*.jar
