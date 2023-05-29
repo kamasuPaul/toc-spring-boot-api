@@ -46,8 +46,12 @@ jobs:
         script: |
           mkdir -p ${{ secrets.REMOTE_TARGET }}
 
-    - name: Copy JAR to SSH server
-      run: scp -i ${{ secrets.SSH_PRIVATE_KEY }} ./build/libs/*.jar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}
-
+#    - name: Copy JAR to SSH server
+#      run: scp -i ${{ secrets.SSH_PRIVATE_KEY }} ./build/libs/*.jar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}
+    - name: Log and copy JAR to SSH server
+      run: |
+        command="scp -i ${{ secrets.SSH_PRIVATE_KEY }} ./build/libs/*.jar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}/api.jar"
+        echo "Executing command: $command"
+        eval "$command"
     - name: Clean up
       run: rm -rf ./build/libs/*.jar
