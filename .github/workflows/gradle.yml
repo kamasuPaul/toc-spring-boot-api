@@ -53,7 +53,7 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "build/libs/*.jar"
-        target: "${{ secrets.REMOTE_TARGET }}/api.jar"
-        
+        target: "${{ secrets.REMOTE_TARGET }}"
+
     - name: Clean up
       run: rm -rf ./build/libs/*.jar
