@@ -37,6 +37,15 @@ jobs:
     - name: Execute Gradle build without tests
       run: ./gradlew build -x test
 
+    - name: Create remote directory if not present
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          mkdir -p ${{ secrets.REMOTE_TARGET }}
+
     - name: Copy JAR to SSH server
       run: scp -i ${{ secrets.SSH_PRIVATE_KEY }} ./build/libs/*.jar ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}
 
