@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,6 +26,7 @@ public class TableDto {
     private List< @Valid Content> contents;
     @JsonIgnore
     public Table getTable(){
-        return new Table(this.id,this.name,this.description,this.category, LocalDateTime.now(),LocalDateTime.now());
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+        return new Table(this.id,this.name,this.description,this.category,userId, LocalDateTime.now(),LocalDateTime.now());
     }
 }

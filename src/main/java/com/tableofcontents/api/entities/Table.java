@@ -6,9 +6,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @jakarta.persistence.Table(name = "tables")
@@ -25,6 +22,10 @@ public class Table {
     private String name;
     private String description;
     private String category;
+
+    @Column(name = "user_id",nullable = false)
+    private String userId;
+
     @CreationTimestamp
     @Column(name = "created_at",nullable = false,updatable = false)
     private LocalDateTime createdAt;
