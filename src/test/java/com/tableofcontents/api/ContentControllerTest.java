@@ -41,7 +41,7 @@ class ContentControllerTest {
         String id = "f8a53298-81e0-4e33-a3f7-b82814ca0ffd";
         String tableId = "fc04f4ef-31f6-4c32-aae5-95b593acbf83";
         //mock the tableServicee to return a table
-        Table table = new Table(tableId,"My table","Testing table","default",LocalDateTime.now(), LocalDateTime.now());
+        Table table = new Table(tableId,"My table","Testing table","default","",LocalDateTime.now(), LocalDateTime.now());
         Content content = new Content(id,"Content 1","2",1,1,id,null,table,LocalDateTime.now(), LocalDateTime.now(),null);
         Content createdContent = new Content(id,"Content 2","2",1,1,id,null,table,LocalDateTime.now(), LocalDateTime.now(),null);
 
