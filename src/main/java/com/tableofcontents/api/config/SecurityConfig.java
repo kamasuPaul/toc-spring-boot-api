@@ -20,7 +20,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(configurer ->
                         configurer
-                                .requestMatchers(HttpMethod.GET,"/api/tables")
+                                .requestMatchers(HttpMethod.GET,"/api/tables","/api/tables/**")
                                 .permitAll()
                 )
                 // Enable JWT Authentication
