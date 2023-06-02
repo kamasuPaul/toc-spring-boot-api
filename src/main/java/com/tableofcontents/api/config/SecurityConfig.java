@@ -20,8 +20,8 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(configurer ->
                         configurer
-                                .requestMatchers(HttpMethod.GET,"/api/tables","/api/tables/**")
-                                .permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/tables/**").permitAll() // Ignore GET /api/tables and GET /api/tables/{tableId}
+                                .anyRequest().authenticated()
                 )
                 // Enable JWT Authentication
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
