@@ -20,6 +20,8 @@ public class TableDto {
     private String description;
     @NotBlank(message = "Category is required")
     private String category;
+    private String imageUrl;
+    private String contentUrl;
 
     @NotEmpty
     @Valid
@@ -27,6 +29,6 @@ public class TableDto {
     @JsonIgnore
     public Table getTable(){
         String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-        return new Table(this.id,this.name,this.description,this.category,userId, LocalDateTime.now(),LocalDateTime.now());
+        return new Table(this.id,this.name,this.description,this.category,userId, imageUrl,contentUrl,LocalDateTime.now(),LocalDateTime.now());
     }
 }

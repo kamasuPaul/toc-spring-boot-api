@@ -69,6 +69,8 @@ public class TableController {
             dto.setId(table.getId());
             dto.setDescription(table.getDescription());
             dto.setCategory(table.getCategory());
+            dto.setImageUrl(table.getImageUrl());
+            dto.setContentUrl(table.getContentUrl());
             List<Content> savedContents = contentService.getContentsByParentId(table.getId(), null);
             dto.setContents(savedContents);
 
