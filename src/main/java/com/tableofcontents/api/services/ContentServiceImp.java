@@ -29,6 +29,10 @@ public class ContentServiceImp implements ContentService {
 
     }
 
+    @Override
+    public void deleteByTableId(String tableId) {
+        contentRepository.deleteByTableId(tableId);
+    }
     private Content saveContent(Content content, Table table,int level) {
         content.setTable(table);
         String groupUUid = UUID.randomUUID().toString();

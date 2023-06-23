@@ -13,4 +13,6 @@ public interface ContentRepository extends JpaRepository<Content,String> {
     List<Content> findByTableId(String tableId);
 
     List<Content> findByTableIdAndParentIdOrderByOrdering(String tableId, String parentId);
+
+    void deleteByTableId(String tableId);
 }
