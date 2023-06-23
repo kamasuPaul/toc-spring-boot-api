@@ -55,5 +55,14 @@ jobs:
         source: "build/libs/*.jar"
         target: "${{ secrets.REMOTE_TARGET }}"
 
+    - name: Restart Java service
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          systemctl restart toc.service
+
     - name: Clean up
       run: rm -rf ./build/libs/*.jar
