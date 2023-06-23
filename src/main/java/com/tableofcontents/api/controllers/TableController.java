@@ -79,6 +79,39 @@ public class TableController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PatchMapping ("/tables/{id}")
+    @Validated
+    public ResponseEntity<TableDto> updateTable(@Valid @RequestBody TableDto tableDto,@PathVariable String id) {
+        try {
+            Optional<Table> tableOption = tableService.getTableById(id);
+            if (tableOption.isPresent()) {
+                Table table = tableOption.get();
+                //delete old contents
+                contentService.deleteByTableId(id);
+                //save new table details
+                tableDto.setId(table.getId());
+                tableService.updateTable(tableDto.getTable());
+                //save new table contents
+                @NotEmpty @Valid List<@Valid Content> contents = tableDto.getContents();
+                contentService.saveContentList(contents, table);
+
+                TableDto dto = new TableDto();
+                dto.setName(table.getName());
+                dto.setId(table.getId());
+                dto.setDescription(table.getDescription());
+                dto.setCategory(table.getCategory());
+                dto.setImageUrl(table.getImageUrl());
+                dto.setContentUrl(table.getContentUrl());
+                List<Content> savedContents = contentService.getContentsByParentId(table.getId(), null);
+                dto.setContents(savedContents);
+                return new ResponseEntity<TableDto>(dto, HttpStatus.OK);
+            }else{
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Table with id " + id + " not found");
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @DeleteMapping("/tables/{id}")
     public ResponseEntity<HttpStatus> deleteTable(@PathVariable String id) {
